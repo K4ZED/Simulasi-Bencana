@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Gunung Berapi</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/simulation.css">
+    <style>
+        body { --accent: var(--volcano); }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body class="sim-page">
+
+    <div class="sim-layout">
+
+        <aside class="sim-panel">
+            <a href="../../index.html" class="back-link">&larr; Kembali</a>
+
+            <div class="panel-header">
+                <div class="panel-tag">Vulkanologi</div>
+                <h1 class="panel-title">Gunung Berapi</h1>
+            </div>
+
+            <div class="controls">
+
+                <div class="control-group">
+                    <label>
+                        Tekanan Magma
+                        <span class="val"><span id="val-pressure">5.0</span> / 10</span>
+                    </label>
+                    <input type="range" id="pressure" min="1" max="10" step="0.1" value="5">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Volume Erupsi
+                        <span class="val"><span id="val-volume">5.0</span> / 10</span>
+                    </label>
+                    <input type="range" id="volume" min="1" max="10" step="0.1" value="5">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Arah Angin
+                        <span class="val"><span id="val-winddir">45</span>&deg;</span>
+                    </label>
+                    <input type="range" id="winddir" min="0" max="360" step="1" value="45">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Kecepatan Angin
+                        <span class="val"><span id="val-windspeed">10</span> km/jam</span>
+                    </label>
+                    <input type="range" id="windspeed" min="0" max="50" step="1" value="10">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Kecepatan Simulasi
+                        <span class="val"><span id="val-simspeed">1.0</span>&times;</span>
+                    </label>
+                    <input type="range" id="simspeed" min="0.5" max="5" step="0.5" value="1">
+                </div>
+
+            </div>
+
+            <div class="btn-group">
+                <button id="btn-start" class="btn-primary">Mulai</button>
+                <button id="btn-reset">Reset</button>
+            </div>
+
+            <div class="sim-status">
+                <div class="status-item">
+                    <span class="status-label">Status</span>
+                    <span class="status-value" id="status-text">Siap</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Ketinggian Semburan</span>
+                    <span class="status-value" id="ejection-height">-- m</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Jangkauan Abu</span>
+                    <span class="status-value" id="ash-range">-- km</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Waktu Simulasi</span>
+                    <span class="status-value" id="sim-time">0 s</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="sim-viewport">
+            <canvas id="sim-canvas"></canvas>
+            <div class="canvas-hint">Drag putar &nbsp;|&nbsp; Scroll zoom</div>
+        </div>
+
+    </div>
+
+    <section class="sim-info container">
+        <h2>Tentang Gunung Berapi</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Mekanisme Erupsi</h3>
+                <p>
+                    Erupsi terjadi saat tekanan magma di dalam kantong magma melebihi kekuatan
+                    batuan di atasnya. Magma yang kaya gas naik melalui saluran utama dan keluar
+                    sebagai lava, abu vulkanik, gas SO&sub2;, dan piroklastik.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Tipe Erupsi</h3>
+                <p>
+                    Erupsi efusif menghasilkan aliran lava yang perlahan, sedangkan erupsi eksplosif
+                    melemparkan material piroklastik jauh ke udara. Indeks VEI (Volcanic Explosivity
+                    Index) mengukur skala ledakan dari 0 (lemah) hingga 8 (sangat dahsyat).
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Dampak & Mitigasi</h3>
+                <p>
+                    Abu vulkanik dapat menjangkau ratusan kilometer dan mengganggu penerbangan.
+                    Pemantauan dilakukan via seismograf, GPS, dan sensor gas. Radius bahaya
+                    ditetapkan berdasarkan potensi aliran piroklastik dan lahar.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="sim.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Tsunami</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/simulation.css">
+    <style>
+        body { --accent: var(--tsunami); }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body class="sim-page">
+
+    <div class="sim-layout">
+
+        <!-- Control Panel -->
+        <aside class="sim-panel">
+            <a href="../../index.html" class="back-link">&larr; Kembali</a>
+
+            <div class="panel-header">
+                <div class="panel-tag">Hidrometeorologi</div>
+                <h1 class="panel-title">Tsunami</h1>
+            </div>
+
+            <div class="controls">
+
+                <div class="control-group">
+                    <label>
+                        Magnitudo Gempa
+                        <span class="val"><span id="val-magnitude">7.5</span> Mw</span>
+                    </label>
+                    <input type="range" id="magnitude" min="6.0" max="9.5" step="0.1" value="7.5">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Kedalaman Sumber
+                        <span class="val"><span id="val-depth">20</span> km</span>
+                    </label>
+                    <input type="range" id="depth" min="5" max="60" step="1" value="20">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Jarak Episentrum
+                        <span class="val"><span id="val-distance">80</span> km</span>
+                    </label>
+                    <input type="range" id="distance" min="20" max="200" step="5" value="80">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Kecepatan Simulasi
+                        <span class="val"><span id="val-simspeed">1.0</span>&times;</span>
+                    </label>
+                    <input type="range" id="simspeed" min="0.5" max="5" step="0.5" value="1">
+                </div>
+
+            </div>
+
+            <div class="btn-group">
+                <button id="btn-start" class="btn-primary">Mulai</button>
+                <button id="btn-reset">Reset</button>
+            </div>
+
+            <div class="sim-status">
+                <div class="status-item">
+                    <span class="status-label">Status</span>
+                    <span class="status-value" id="status-text">Siap</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Tinggi Gelombang</span>
+                    <span class="status-value" id="wave-height">-- m</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Kecepatan Gelombang</span>
+                    <span class="status-value" id="wave-speed">-- km/jam</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Waktu Simulasi</span>
+                    <span class="status-value" id="sim-time">0 s</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 3D Viewport -->
+        <div class="sim-viewport">
+            <canvas id="sim-canvas"></canvas>
+            <div class="canvas-hint">Drag putar &nbsp;|&nbsp; Scroll zoom</div>
+        </div>
+
+    </div>
+
+    <!-- Educational Info -->
+    <section class="sim-info container">
+        <h2>Tentang Tsunami</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Penyebab</h3>
+                <p>
+                    Tsunami paling sering dipicu oleh gempa bumi bawah laut dengan magnitudo
+                    di atas 7.0 Mw. Pergerakan vertikal dasar laut memindahkan kolom air
+                    secara tiba-tiba, menghasilkan gelombang berenergi sangat besar.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Karakteristik</h3>
+                <p>
+                    Di lautan dalam, tsunami bergerak dengan kecepatan 700&ndash;1000 km/jam
+                    namun ketinggiannya hanya 0.5&ndash;1 meter. Saat mendekati pantai dan
+                    laut menjadi dangkal, gelombang melambat namun ketinggiannya bisa mencapai
+                    10&ndash;30 meter (efek shoaling).
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Mitigasi</h3>
+                <p>
+                    Sistem peringatan dini (early warning system) menggunakan sensor tekanan
+                    bawah laut (DART buoy) untuk mendeteksi perubahan muka air. Waktu evakuasi
+                    bisa berkisar 10 menit hingga beberapa jam tergantung jarak episentrum.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="sim.js"></script>
+
+</body>
+</html>

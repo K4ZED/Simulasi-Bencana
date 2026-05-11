@@ -1,0 +1,248 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg:           #0b0b12;
+    --surface:      #111119;
+    --surface-2:    #17171f;
+    --border:       #1e1e2c;
+    --border-hover: #2a2a3c;
+
+    --text:         #b8b8cc;
+    --text-muted:   #606075;
+    --text-heading: #eeeef8;
+
+    --tsunami:      #00b4d8;
+    --volcano:      #ff6030;
+    --earthquake:   #a0a0b8;
+    --landslide:    #b08060;
+    --flood:        #4096ff;
+    --drought:      #e8a820;
+
+    --radius:       8px;
+    --transition:   0.18s ease;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-kicker {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.site-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--text-heading);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+
+.site-subtitle {
+    max-width: 600px;
+    font-size: 0.975rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+}
+
+/* ---------- Section label ---------- */
+
+.section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+}
+
+/* ---------- Grid ---------- */
+
+.sim-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-bottom: 4rem;
+}
+
+/* ---------- Card ---------- */
+
+.sim-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
+
+/* top accent bar */
+.sim-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    opacity: 0.8;
+    transition: opacity var(--transition);
+}
+
+.sim-card--tsunami::before    { background: var(--tsunami); }
+.sim-card--volcano::before    { background: var(--volcano); }
+.sim-card--earthquake::before { background: var(--earthquake); }
+.sim-card--landslide::before  { background: var(--landslide); }
+.sim-card--flood::before      { background: var(--flood); }
+.sim-card--drought::before    { background: var(--drought); }
+
+/* hover state */
+.sim-card:hover {
+    background: var(--surface-2);
+    transform: translateY(-3px);
+}
+
+.sim-card--tsunami:hover    { border-color: var(--tsunami); }
+.sim-card--volcano:hover    { border-color: var(--volcano); }
+.sim-card--earthquake:hover { border-color: var(--earthquake); }
+.sim-card--landslide:hover  { border-color: var(--landslide); }
+.sim-card--flood:hover      { border-color: var(--flood); }
+.sim-card--drought:hover    { border-color: var(--drought); }
+
+.sim-card:hover::before {
+    opacity: 1;
+}
+
+/* card internals */
+.sim-card__top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.sim-card__tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.sim-card--tsunami    .sim-card__tag { color: var(--tsunami); }
+.sim-card--volcano    .sim-card__tag { color: var(--volcano); }
+.sim-card--earthquake .sim-card__tag { color: var(--earthquake); }
+.sim-card--landslide  .sim-card__tag { color: var(--landslide); }
+.sim-card--flood      .sim-card__tag { color: var(--flood); }
+.sim-card--drought    .sim-card__tag { color: var(--drought); }
+
+.sim-card__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    letter-spacing: -0.015em;
+}
+
+.sim-card__desc {
+    font-size: 0.855rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    flex: 1;
+}
+
+.sim-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.85rem;
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+}
+
+.sim-card__cta {
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color var(--transition);
+}
+
+.sim-card__arrow {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    transition: transform var(--transition), color var(--transition);
+}
+
+.sim-card:hover .sim-card__cta  { color: var(--text); }
+.sim-card:hover .sim-card__arrow { transform: translateX(5px); color: var(--text); }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+    margin-top: auto;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+}
+
+.site-footer p {
+    font-size: 0.775rem;
+    color: var(--text-muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+    .sim-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 580px) {
+    .container {
+        padding: 0 1.25rem;
+    }
+
+    .site-header {
+        padding: 3rem 0 2.5rem;
+    }
+
+    .sim-grid {
+        grid-template-columns: 1fr;
+    }
+}

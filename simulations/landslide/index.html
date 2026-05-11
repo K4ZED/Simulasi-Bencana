@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Tanah Longsor</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/simulation.css">
+    <style>
+        body { --accent: var(--landslide); }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body class="sim-page">
+
+    <div class="sim-layout">
+
+        <aside class="sim-panel">
+            <a href="../../index.html" class="back-link">&larr; Kembali</a>
+
+            <div class="panel-header">
+                <div class="panel-tag">Geologi</div>
+                <h1 class="panel-title">Tanah Longsor</h1>
+            </div>
+
+            <div class="controls">
+
+                <div class="control-group">
+                    <label>
+                        Kemiringan Lereng
+                        <span class="val"><span id="val-slope">35</span>&deg;</span>
+                    </label>
+                    <input type="range" id="slope" min="10" max="70" step="1" value="35">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Saturasi Air Tanah
+                        <span class="val"><span id="val-saturation">50</span>%</span>
+                    </label>
+                    <input type="range" id="saturation" min="0" max="100" step="1" value="50">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Jenis Material
+                        <span class="val" id="val-material">Tanah</span>
+                    </label>
+                    <input type="range" id="material" min="0" max="2" step="1" value="0">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Kecepatan Simulasi
+                        <span class="val"><span id="val-simspeed">1.0</span>&times;</span>
+                    </label>
+                    <input type="range" id="simspeed" min="0.5" max="5" step="0.5" value="1">
+                </div>
+
+            </div>
+
+            <div class="btn-group">
+                <button id="btn-start" class="btn-primary">Mulai</button>
+                <button id="btn-reset">Reset</button>
+            </div>
+
+            <div class="sim-status">
+                <div class="status-item">
+                    <span class="status-label">Status</span>
+                    <span class="status-value" id="status-text">Siap</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Volume Material</span>
+                    <span class="status-value" id="debris-volume">-- m&sup3;</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Kecepatan Aliran</span>
+                    <span class="status-value" id="flow-speed">-- m/s</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Waktu Simulasi</span>
+                    <span class="status-value" id="sim-time">0 s</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="sim-viewport">
+            <canvas id="sim-canvas"></canvas>
+            <div class="canvas-hint">Drag putar &nbsp;|&nbsp; Scroll zoom</div>
+        </div>
+
+    </div>
+
+    <section class="sim-info container">
+        <h2>Tentang Tanah Longsor</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Penyebab</h3>
+                <p>
+                    Tanah longsor terjadi saat gaya gravitasi pada lereng melebihi gaya kohesi
+                    tanah. Faktor pemicu utama adalah hujan lebat yang menjenuhkan tanah,
+                    gempa bumi, erosi kaki lereng, dan penggundulah hutan yang menghilangkan
+                    akar pengikat tanah.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Jenis Material</h3>
+                <p>
+                    Tanah lempung memiliki kohesi tinggi namun kehilangan kekuatan drastis saat
+                    jenuh air. Pasir dan kerikil (gravel) mudah longsor pada kemiringan di atas
+                    sudut gesek dalam (&phi;). Batuan lapuk rentan terhadap longsoran baji dan
+                    longsoran bidang.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Mitigasi</h3>
+                <p>
+                    Penanganan meliputi sistem drainase untuk menurunkan muka air tanah,
+                    penghijauan lereng, pemasangan bronjong dan dinding penahan, serta
+                    perataan sudut lereng. Pemetaan zona rawan dilakukan dengan analisis
+                    kestabilan lereng menggunakan metode irisan (Bishop, Fellenius).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="sim.js"></script>
+
+</body>
+</html>

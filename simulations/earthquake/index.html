@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Gempa Bumi</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/simulation.css">
+    <style>
+        body { --accent: var(--earthquake); }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body class="sim-page">
+
+    <div class="sim-layout">
+
+        <aside class="sim-panel">
+            <a href="../../index.html" class="back-link">&larr; Kembali</a>
+
+            <div class="panel-header">
+                <div class="panel-tag">Seismologi</div>
+                <h1 class="panel-title">Gempa Bumi</h1>
+            </div>
+
+            <div class="controls">
+
+                <div class="control-group">
+                    <label>
+                        Magnitudo
+                        <span class="val"><span id="val-magnitude">7.0</span> Mw</span>
+                    </label>
+                    <input type="range" id="magnitude" min="4.0" max="9.5" step="0.1" value="7.0">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Kedalaman Hiposenter
+                        <span class="val"><span id="val-depth">15</span> km</span>
+                    </label>
+                    <input type="range" id="depth" min="5" max="60" step="1" value="15">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Jarak Episentrum
+                        <span class="val"><span id="val-distance">40</span> km</span>
+                    </label>
+                    <input type="range" id="distance" min="5" max="150" step="5" value="40">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        Kecepatan Simulasi
+                        <span class="val"><span id="val-simspeed">1.0</span>&times;</span>
+                    </label>
+                    <input type="range" id="simspeed" min="0.5" max="5" step="0.5" value="1">
+                </div>
+
+            </div>
+
+            <div class="btn-group">
+                <button id="btn-start" class="btn-primary">Mulai</button>
+                <button id="btn-reset">Reset</button>
+            </div>
+
+            <div class="sim-status">
+                <div class="status-item">
+                    <span class="status-label">Status</span>
+                    <span class="status-value" id="status-text">Siap</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Akselerasi Tanah</span>
+                    <span class="status-value" id="pga">-- g</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Skala Intensitas</span>
+                    <span class="status-value" id="mmi">--</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Waktu Simulasi</span>
+                    <span class="status-value" id="sim-time">0 s</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="sim-viewport">
+            <canvas id="sim-canvas"></canvas>
+            <div class="canvas-hint">Drag putar &nbsp;|&nbsp; Scroll zoom</div>
+        </div>
+
+    </div>
+
+    <section class="sim-info container">
+        <h2>Tentang Gempa Bumi</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Penyebab</h3>
+                <p>
+                    Gempa bumi terjadi akibat pelepasan energi secara tiba-tiba dari pergerakan
+                    lempeng tektonik. Titik asal pelepasan energi disebut hiposenter (di bawah
+                    tanah), sedangkan proyeksinya di permukaan disebut episentrum.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Gelombang Seismik</h3>
+                <p>
+                    Gempa menghasilkan gelombang P (primer, kompresi, lebih cepat &plusmn;6 km/s)
+                    dan gelombang S (sekunder, geser, lebih lambat &plusmn;3.5 km/s). Gelombang S
+                    lebih destruktif karena menyebabkan gerakan horizontal pada struktur bangunan.
+                </p>
+            </div>
+            <div class="info-card">
+                <h3>Skala Kekuatan</h3>
+                <p>
+                    Skala Momen Magnitudo (Mw) mengukur energi total yang dilepaskan. Setiap
+                    kenaikan 1 Mw setara dengan pelepasan energi ~32 kali lebih besar. Gempa
+                    di atas 7.0 Mw berpotensi merusak bangunan dalam radius luas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="sim.js"></script>
+
+</body>
+</html>
